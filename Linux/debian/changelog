@@ -1,0 +1,48 @@
+aescrypt (3.14~ppa-disco1) disco; urgency=low
+
+  * No-changes build from upstream for Ubuntu 19.04 "Disco Dingo"
+
+ -- Peter J. Mello <admin@petermello.net>  Fri, 31 May 2019 12:17:29 -0700
+
+aescrypt (3.14~bionic1) bionic; urgency=low
+
+  * new upstream release
+
+ -- Anton Asche <anton.asche@mhinac.de>  Wed, 09 Jan 2019 16:26:29 +0100
+
+aescrypt (3.13~bionic1) bionic; urgency=low
+
+  * rebuild for Ubuntu 18.04 (no functional changes)
+
+ -- Anton Asche <anton.asche@mhinac.de>  Mon, 11 Mar 2018 12:44:59 +0100
+
+aescrypt (3.13~xenial1) xenial; urgency=low
+
+  * new upstream release
+
+ -- Anton Asche <anton.asche@mhinac.de>  Mon, 11 May 2017 19:50:55 +0200
+
+aescrypt (3.11~xenial1) xenial; urgency=low
+
+  * new upstream release
+  * AESCrypt.desktop: don't show in menu
+
+ -- Anton Asche <anton.asche@mhinac.de>  Mon, 09 Jan 2017 12:32:41 +0100
+
+aescrypt (3.10~xenial1) xenial; urgency=low
+
+  * new upstream release
+
+ -- Anton Asche <anton.asche@mhinac.de>  Tue, 17 May 2015 14:54:23 +0200
+
+aescrypt (3.0.9~xenial2) xenial; urgency=low
+
+  * added README.Debian (no functional changes)
+
+ -- Anton Asche <anton.asche@mhinac.de>  Tue, 02 Dec 2014 14:57:00 +0100
+
+aescrypt (3.0.9~xenial1) xenial; urgency=low
+
+  * initial release (as debian package)
+ 
+ -- Anton Asche <anton.asche@mhinac.de>  Thu, 09 Oct 2014 19:13:00 +0100
