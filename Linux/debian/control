@@ -1,0 +1,12 @@
+Package: aescrypt
+Version: 3.14~ppa-disco1
+Architecture: amd64
+Maintainer: Peter J. Mello <admin@petermello.net>
+Depends: libc6 (>= 2.14), zenity | kdialog
+Section: utils
+Priority: extra
+Homepage: https://www.aescrypt.com/
+Description: Encrypt or Decrypt a file using AES
+ AES Crypt is a file encryption software available on several operating
+ systems that uses the industry standard Advanced Encryption Standard
+ (AES) to easily and securely encrypt files.
