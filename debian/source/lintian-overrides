@@ -1,0 +1,2 @@
+# Lintian fails to parse well-formed YAML nested mappings as allowed by DEP-12
+upstream-metadata-missing-bug-tracking

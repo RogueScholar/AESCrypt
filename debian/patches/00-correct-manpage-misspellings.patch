@@ -1,0 +1,30 @@
+Description: Correct misspellings in man page
+Author: Peter J. Mello <admin@petermello.net>
+Origin: other
+Forwarded: no
+Last-Update: 2021-05-07
+
+--- a/Linux/man/aescrypt.1
++++ b/Linux/man/aescrypt.1
+@@ -151,7 +151,7 @@ aescrypt \- AES Crypt encrypts and decry
+ .PP
+ \&\fBaescrypt\fR encrypts files with a supplied password, and stores them
+ to the output file specified by the '\-o' switch.  If no output file
+-is specified, then the file will be written to a file of the same name with the extention '.aes' appended.
++is specified, then the file will be written to a file of the same name with the extension '.aes' appended.
+ .SH "OPTIONS"
+ .IX Header "OPTIONS"
+ .IP "\fB\-d\fR" 8
+@@ -162,10 +162,10 @@ Decrypt the file.
+ Encrypt the file.
+ .IP "\fB\-p <password>\fR" 8
+ .IX Item "-p <password>"
+-Pass the password on the command line.  If this option is ommited and -k is ommitted, the command will prompt for a password securily.
++Pass the password on the command line.  If this option is omitted and -k is omitted, the command will prompt for a password securily.
+ .IP "\fB\-k <keyfile>\fR" 8
+ .IX Item "-k <keyfile>"
+-Pass the filename of the key file used for encrypting or decrypting.  If this option is ommited and -p is omitted, the command will prompt for a password securily.
++Pass the filename of the key file used for encrypting or decrypting.  If this option is omitted and -p is omitted, the command will prompt for a password securily.
+ .IP "\fB\-o <output filename>\fR" 8
+ .IX Item "-o <output filename>"
+ Specify the output filename on the command line.

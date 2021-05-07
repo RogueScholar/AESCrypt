@@ -1,0 +1,4 @@
+version=4
+opts="repacksuffix=+dfsg,pgpmode=self,dversionmangle=auto" \
+  https://www.aescrypt.com/download/ \
+  v3/linux/@PACKAGE@@ANY_VERSION@@ARCHIVE_EXT@

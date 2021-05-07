@@ -1,0 +1,8 @@
+# AESCrypt for Debian
+
+Changes:
+
+  * src layout: moved content of folder src one level up, removed folder src
+  * Fixed errors in gui/AESCrypt.desktop
+
+ -- Anton Asche <anton.asche@mhinac.de>  Tue, 17 May 2015 14:54:23 +0200

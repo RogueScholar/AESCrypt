@@ -1,0 +1,32 @@
+Description: Add Autoconf macro to allow control of icon installation path
+Author: Peter J. Mello <admin@petermello.net>
+Origin: other
+Forwarded: no
+Last-Update: 2021-05-07
+
+--- a/Linux/configure.ac
++++ b/Linux/configure.ac
+@@ -14,7 +14,7 @@
+ 
+ AC_PREREQ(2.60)
+ 
+-AC_INIT([aescrypt], [3.0.11_master])
++AC_INIT([aescrypt], [3.14])
+ AC_DEFINE([AESCRYPT_VERSION_RESOURCE], [3,0,11,0], [Version in windows resource format])
+ PACKAGE_RPM_RELEASE=1
+ AC_SUBST([PACKAGE_RPM_RELEASE])
+@@ -106,8 +106,13 @@ fi
+ 
+ AC_DEFINE_UNQUOTED([PACKAGE_DATE], ["$(date -u)"], [build date])
+ 
++AC_ARG_ENABLE(iconsdir,
++  [ --iconsdir=DIR   Directory in XDG Base Dir scheme for desktop icons],
++  [ICON_DIR="${enableval}"], [ICON_DIR="\$(datarootdir)/icons/${PACKAGE_NAME}"]
++)
++
+ AC_SUBST([applicationsdir], ["\$(datarootdir)/applications"])
+-AC_SUBST([iconsdir], ["\$(datarootdir)/icons/${PACKAGE_NAME}"])
++AC_SUBST([iconsdir], ["${ICON_DIR}"])
+ 
+ AM_CONDITIONAL([ENABLE_GUI], [test "${enable_gui}" = "yes"])
+ AM_CONDITIONAL([WINDOWS], [test "${WINDOWS}" = "yes"])

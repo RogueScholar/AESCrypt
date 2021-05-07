@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+# ------------------------------------------------------------------------------
+# SPDX-FileCopyrightText: 🄯 2021 Peter J. Mello <admin@petermello.net>
+#
+# SPDX-License-Identifier: MPL-2.0
+# ------------------------------------------------------------------------------
+# A shell script wrapper to provide compatibility between the AESCrypt Perl GUI
+# and the Freedesktop.org XDG Desktop Entry Specification.
+# ------------------------------------------------------------------------------
+set -e
+
+if command -v kdialog >/dev/null 2>&1; then
+  TARGET_FILE="$(kdialog --desktopfile com.aescrpy.AESCrypt.GUI --icon \
+    aescrypt --title "AES Crypt: Select a file to open" --getopenfilename)"
+elif command -v zenity >/dev/null 2>&1; then
+  TARGET_FILE="$(zenity --title "AES Crypt: Select a file to open" \
+    --window-icon /usr/share/icons/hicolor/32x32/apps/aescrypt.png \
+    --file-selection)"
+else
+  echo "Unable to locate kialog or zenity, please install one and try again."
+fi
+
+aescrypt-gui "${TARGET_FILE}" &

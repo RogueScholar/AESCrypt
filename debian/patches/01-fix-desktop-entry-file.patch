@@ -1,0 +1,65 @@
+Description: Add missing fields to Desktop Entry file
+Author: Peter J. Mello <admin@petermello.net>
+Origin: other
+Forwarded: no
+Last-Update: 2021-05-07
+
+--- aescrypt-3.14+dfsg.orig/Linux/gui/Makefile.am
++++ aescrypt-3.14+dfsg/Linux/gui/Makefile.am
+@@ -17,11 +17,11 @@ MAINTAINERCLEANFILES = \
+ 	$(NULL)
+ 
+ CLEANFILES = \
+-	AESCrypt.desktop \
++	com.aescrypt.AESCrypt.GUI.desktop \
+ 	$(NULL)
+ 
+ EXTRA_DIST = \
+-	AESCrypt.desktop.in \
++	com.aescrypt.AESCrypt.GUI.desktop.in \
+ 	$(NULL)
+ 
+ if ENABLE_GUI
+@@ -31,7 +31,7 @@ dist_bin_SCRIPTS = \
+ 	$(NULL)
+ 
+ applications_DATA = \
+-	AESCrypt.desktop \
++	com.aescrypt.AESCrypt.GUI.desktop \
+ 	$(NULL)
+ 
+ dist_icons_DATA = \
+@@ -40,8 +40,7 @@ dist_icons_DATA = \
+ 
+ endif
+ 
+-AESCrypt.desktop:	AESCrypt.desktop.in
+-	sed \
+-		-e 's#@bindir[@]#$(bindir)#g' \
+-		-e 's#@iconsdir[@]#$(iconsdir)#g' \
+-		"$(srcdir)/AESCrypt.desktop.in" > AESCrypt.desktop
++com.aescrypt.AESCrypt.GUI.desktop:	com.aescrypt.AESCrypt.GUI.desktop.in
++	sed -e 's#@bindir[@]#$(bindir)#g' \
++		"$(srcdir)/com.aescrypt.AESCrypt.GUI.desktop.in" \
++		>com.aescrypt.AESCrypt.GUI.desktop
+--- /dev/null
++++ aescrypt-3.14+dfsg/Linux/gui/com.aescrypt.AESCrypt.GUI.desktop.in
+@@ -0,0 +1,18 @@
++[Desktop Entry]
++Version=1.1
++Type=Application
++Name=AESCrypt
++GenericName=File encryption tool
++Comment=Encrypt and decrypt files using the AES algorithm
++TryExec=@bindir@/aescrypt-gui
++Exec=/usr/share/aescrypt/aescrypt-gui-xdg %f
++Icon=aescrypt
++Categories=Utility;
++Keywords=encrypt;private;
++MimeType=application/octet-stream;
++StartupNotify=true
++StartupWMClass=kdialog
++DBusActivatable=false
++Terminal=false
++NoDisplay=false
++Hidden=false

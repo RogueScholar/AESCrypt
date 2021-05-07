@@ -1,0 +1,83 @@
+#!/usr/bin/make -f
+# -*- mode: makefile-gmake; coding: utf-8 -*-
+
+BASH_PATH ::= $(shell which bash)
+SHELL     ::= $(shell realpath -Leq $(BASH_PATH) || echo '/bin/sh')
+
+ifeq (,$(filter terse,$(DEB_BUILD_OPTIONS)))
+DH_INTERNAL_OPTIONS = --verbose
+export DH_VERBOSE=1
+endif
+
+DEB_BUILD_MAINT_OPTIONS ::= hardening=+all
+DISTRO_VENDOR           ::= $(shell dpkg-vendor --query Vendor)
+DPKG_EXPORT_BUILDFLAGS    = 1
+UBUNTUVER               ::= $(shell lsb_release -rs | cut -c-5)
+
+ifeq (Ubuntu,$(DISTRO_VENDOR))
+ifneq ($(UBUNTUVER),$(shell printf "$(UBUNTUVER)\n17.10\n" | sort -g | head -1))
+DEB_BUILD_MAINT_OPTIONS  += future=+lfs
+DPKG_EXPORT_BUILDTOOLS    = 1
+include /usr/share/dpkg/buildtools.mk
+endif
+endif
+
+ifeq (Ubuntu,$(DISTRO_VENDOR))
+ifneq ($(UBUNTUVER),$(shell printf "$(UBUNTUVER)\n19.04\n" | sort -g | head -1))
+DEB_BUILD_MAINT_OPTIONS  += reproducible=+fixfilepath
+endif
+endif
+
+ifeq (Ubuntu,$(DISTRO_VENDOR))
+ifneq ($(UBUNTUVER),$(shell printf "$(UBUNTUVER)\n21.04\n" | sort -g | head -1))
+DEB_BUILD_MAINT_OPTIONS  += optimize=+lto
+endif
+endif
+
+include /usr/share/dpkg/default.mk
+
+export DEB_BUILD_MAINT_OPTIONS
+
+
+%:
+	dh $@ -v -Sautoconf -DLinux
+
+
+override_dh_auto_configure:
+	dh_auto_configure -O-v -O-Sautoconf -O-DLinux -- \
+		--enable-iconsdir=/usr/share/aescrypt
+
+override_dh_auto_install:
+	dh_auto_install -O-v -O-Sautoconf -O-DLinux
+	install -Dm0755 -t $(CURDIR)/debian/aescrypt/usr/share/aescrypt \
+		$(CURDIR)/debian/aescrypt-gui-xdg
+	cd $(CURDIR)/debian/aescrypt && install -d usr/share/aescrypt \
+		usr/share/icons/hicolor/32x32/apps usr/share/icons/hicolor/24x24/apps \
+		usr/share/icons/hicolor/22x22/apps usr/share/icons/hicolor/16x16/apps
+	cp -vf $(CURDIR)/Linux/gui/SmallLock.png \
+		$(CURDIR)/debian/aescrypt/usr/share/icons/hicolor/32x32/apps/aescrypt.png
+	exiftool -all= \
+		$(CURDIR)/debian/aescrypt/usr/share/icons/hicolor/32x32/apps/aescrypt.png
+	pngcrush -ow -rem allb -reduce \
+		$(CURDIR)/debian/aescrypt/usr/share/icons/hicolor/32x32/apps/aescrypt.png
+	gm convert -size 24x24 $(CURDIR)/Linux/gui/SmallLock.png -resize 24x24 \
+		$(CURDIR)/debian/aescrypt/usr/share/icons/hicolor/24x24/apps/aescrypt.png
+	exiftool -all= \
+		$(CURDIR)/debian/aescrypt/usr/share/icons/hicolor/24x24/apps/aescrypt.png
+	pngcrush -ow -rem allb -reduce \
+		$(CURDIR)/debian/aescrypt/usr/share/icons/hicolor/24x24/apps/aescrypt.png
+	gm convert -size 22x22 $(CURDIR)/Linux/gui/SmallLock.png -resize 22x22 \
+		$(CURDIR)/debian/aescrypt/usr/share/icons/hicolor/22x22/apps/aescrypt.png
+	exiftool -all= \
+		$(CURDIR)/debian/aescrypt/usr/share/icons/hicolor/22x22/apps/aescrypt.png
+	pngcrush -ow -rem allb -reduce \
+		$(CURDIR)/debian/aescrypt/usr/share/icons/hicolor/22x22/apps/aescrypt.png
+	gm convert -size 16x16 $(CURDIR)/Linux/gui/SmallLock.png -resize 16x16 \
+		$(CURDIR)/debian/aescrypt/usr/share/icons/hicolor/16x16/apps/aescrypt.png
+	exiftool -all= \
+		$(CURDIR)/debian/aescrypt/usr/share/icons/hicolor/16x16/apps/aescrypt.png
+	pngcrush -ow -rem allb -reduce \
+		$(CURDIR)/debian/aescrypt/usr/share/icons/hicolor/16x16/apps/aescrypt.png
+
+override_dh_shlibdeps:
+	dh_shlibdeps -O-v -O-Sautoconf -O-DLinux -l/lib/$(DEB_HOST_MULTIARCH)

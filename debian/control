@@ -1,0 +1,20 @@
+Source: aescrypt
+Section: utils
+Priority: optional
+Maintainer: Peter J. Mello <admin@petermello.net>
+Build-Depends: debhelper-compat (= 13), perl, graphicsmagick, lsb-release,
+ pngcrush, libimage-exiftool-perl
+Standards-Version: 4.5.1
+Homepage: https://www.aescrypt.com/
+Vcs-Git: https://github.com/RogueScholar/AESCrypt.git -b debian
+Vcs-Browser: https://github.com/RogueScholar/AESCrypt
+Rules-Requires-Root: no
+
+Package: aescrypt
+Architecture: any
+Depends: perl, kdialog | zenity, ${shlibs:Depends}, ${perl:Depends},
+ ${misc:Depends}
+Description: encrypt/decrypt files using AES - GUI+CLI
+ AES Crypt is free, cross-platform file encryption software that uses the
+ industry standard Advanced Encryption Standard (AES) to easily and securely
+ encrypt files.
